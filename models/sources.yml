@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: demo
+    database: demo
+    schema: demo_schema
+    tables:
+      - name: bike
+      - name: weather
+        description: >
+          Source déclarée sur Snowflake. Le lineage pour cette table n'est
+          pas disponible / non récupérable pour le moment.
