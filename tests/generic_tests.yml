@@ -1,0 +1,106 @@
+version: 2
+
+models:
+  - name: stg_bike
+    description: "Table de staging des données de vélos nettoyées"
+    columns:
+      - name: ride_id
+        description: "Identifiant unique du trajet"
+        tests:
+          - unique
+          - not_null
+      - name: started_at
+        description: "Timestamp de début du trajet"
+        tests:
+          - not_null
+      - name: ended_at
+        description: "Timestamp de fin du trajet"
+        tests:
+          - not_null
+      - name: start_station_name
+        description: "Nom de la station de départ"
+        tests:
+          - not_null
+      - name: start_statio_id
+        description: "ID de la station de départ"
+        tests:
+          - not_null
+      - name: end_station_id
+        description: "ID de la station d'arrivée"
+        tests:
+          - not_null
+      - name: member_csual
+        description: "Type de membre (member ou casual)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['member', 'casual']
+
+  - name: trip_fact
+    description: "Table de faits des trajets avec durée en secondes"
+    columns:
+      - name: ride_id
+        description: "Identifiant du trajet"
+        tests:
+          - unique
+          - not_null
+      - name: trip_date
+        description: "Date du trajet"
+        tests:
+          - not_null
+      - name: start_station_id
+        description: "ID de la station de départ"
+        tests:
+          - not_null
+      - name: end_station_id
+        description: "ID de la station d'arrivée"
+        tests:
+          - not_null
+      - name: trip_duration_seconds
+        description: "Durée du trajet en secondes"
+        tests:
+          - not_null
+      - name: member_casual
+        description: "Type de membre"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['member', 'casual']
+
+  - name: station_dimension
+    description: "Dimension des stations de vélos"
+    columns:
+      - name: station_id
+        description: "Identifiant unique de la station"
+        tests:
+          - unique
+          - not_null
+      - name: station_name
+        description: "Nom de la station"
+        tests:
+          - not_null
+      - name: station_lat
+        description: "Latitude de la station"
+        tests:
+          - not_null
+
+  - name: daily_weather
+    description: "Données météorologiques quotidiennes agrégées"
+    columns:
+      - name: daily_weather
+        description: "Date de la météo"
+        tests:
+          - not_null
+          - unique
+      - name: weather
+        description: "Type de météo"
+        tests:
+          - not_null
+      - name: avg_temp
+        description: "Température moyenne du jour"
+        tests:
+          - not_null
+      - name: avg_humidity
+        description: "Humidité moyenne du jour"
+        tests:
+          - not_null
